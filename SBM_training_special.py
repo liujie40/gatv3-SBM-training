@@ -67,7 +67,7 @@ std_ = 0.1
 mu_up = 20*std_*np.sqrt(np.log(n**2))/(2*np.sqrt(d))
 mu_lb = 0.01*std_/(2*np.sqrt(d))
 
-Nmus = 15
+Nmus = 10
 mus = torch.tensor(np.geomspace(mu_lb.item(), mu_up.item(), Nmus, endpoint=True)).to(device)
 
 epochs = 5000
@@ -81,9 +81,9 @@ print (f"number of mus: {Nmus}")
 print (f"trials: {trials}")
 print (f"epochs: {epochs}")
 
-FIGURESAVEPATH = f"figures/SBM_varying_means_training_smallk_special"
-FILEPICKLESAVEPATH = f"pickle/SBM_varying_means_training_eigen1_smallk_special"
-METAPICKLESAVEPATH = f"pickle/SBM_varying_means_training_meta_smallk_special"
+FIGURESAVEPATH = f"figures/SBM_varying_means_training_smallk_special_128dim"
+FILEPICKLESAVEPATH = f"pickle/SBM_varying_means_training_eigen1_smallk_special_128dim"
+METAPICKLESAVEPATH = f"pickle/SBM_varying_means_training_meta_smallk_special_128dim"
 
 print (f"Figures can be found: {FIGURESAVEPATH}")
 print (f"Model pickle files can be found: {FILEPICKLESAVEPATH}")

@@ -68,9 +68,9 @@ class GATv3Psi(torch.nn.Module):
             out_channels=out_d,
             num_eigenvectors=k,
             node_att_in_channels=2,
-            node_att_out_channels=128,
+            node_att_out_channels=512,
             edge_att_in_channels = 2*k,
-            edge_att_out_channels = 128,
+            edge_att_out_channels = 512,
             share_weights=True, 
             bias=False
         )

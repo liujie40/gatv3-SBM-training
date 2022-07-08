@@ -41,17 +41,22 @@ data = data.to(device)
 gadj = tg.utils.to_dense_adj(data.edge_index).squeeze(0)
 
 g_test = nx.stochastic_block_model(sizes, probs)
-data_test = tg.utils.from_networkx(g_test)
+data_test = tg.utils.from_networkx(g)
 data_test = data_test.to(device)
 gadj_test = tg.utils.to_dense_adj(data_test.edge_index).squeeze(0)
 
-assert torch.equal(gadj, gadj_test) == False, "Training and testing graphs are the same"
+# assert torch.equal(gadj, gadj_test) == False, "Training and testing graphs are the same"
 
 data.adj_matrix = gadj
 data.edge_index_test = data_test.edge_index
 
 EDGE_ATTR_2 = extract_eigen(1, gadj.unsqueeze(0))
 EDGE_ATTR_2_test = extract_eigen(1, gadj_test.unsqueeze(0))
+
+print (torch.where(EDGE_ATTR_2 > 0)[0])
+print (torch.where(EDGE_ATTR_2 < 0)[0])
+print (torch.where(EDGE_ATTR_2_test > 0)[0])
+print (torch.where(EDGE_ATTR_2_test < 0)[0])
 
 which_class = 1
 ground_truth = torch.from_numpy(np.concatenate((np.zeros(int(n/2)), np.ones(int(n/2)))))
@@ -67,10 +72,10 @@ std_ = 0.1
 mu_up = 20*std_*np.sqrt(np.log(n**2))/(2*np.sqrt(d))
 mu_lb = 0.01*std_/(2*np.sqrt(d))
 
-Nmus = 10
+Nmus = 5
 mus = torch.tensor(np.geomspace(mu_lb.item(), mu_up.item(), Nmus, endpoint=True)).to(device)
 
-epochs = 5000
+epochs = 6000
 trials = 7
 
 print ("---------CONFIG---------")
@@ -81,9 +86,9 @@ print (f"number of mus: {Nmus}")
 print (f"trials: {trials}")
 print (f"epochs: {epochs}")
 
-FIGURESAVEPATH = f"figures/SBM_varying_means_training_smallk_special_128dim"
-FILEPICKLESAVEPATH = f"pickle/SBM_varying_means_training_eigen1_smallk_special_128dim"
-METAPICKLESAVEPATH = f"pickle/SBM_varying_means_training_meta_smallk_special_128dim"
+FIGURESAVEPATH = f"figures/SBM_varying_means_training_smallk_special_512dim_samegraph"
+FILEPICKLESAVEPATH = f"pickle/SBM_varying_means_training_eigen1_smallk_special_512dim_samegraph"
+METAPICKLESAVEPATH = f"pickle/SBM_varying_means_training_meta_smallk_special_512dim_samegraph"
 
 print (f"Figures can be found: {FIGURESAVEPATH}")
 print (f"Model pickle files can be found: {FILEPICKLESAVEPATH}")

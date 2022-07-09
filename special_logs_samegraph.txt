@@ -79,7 +79,7 @@ tensor([250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263,
 number of nodes: 500
 p: 0.5
 q: 0.1
-number of mus: 5
+number of mus: 7
 trials: 7
 epochs: 6000
 Figures can be found: figures/SBM_varying_means_training_smallk_special_512dim_samegraph
@@ -89,276 +89,380 @@ Meta pickle files can be found: pickle/SBM_varying_means_training_meta_smallk_sp
 
 
 
-mu index: 0/5, trial: 1/7, current mu: 0.0001386750490563073
-GCN 		 Loss: 0.6724487 | Train: 0.9020 | Test: 0.5680
-RetroGAT 		 Loss: 0.2124874 | Train: 0.9360 | Test: 0.5760
-GATv3 k=1 		 Loss: 0.6717990 | Train: 0.9080 | Test: 0.5660
-	Head:  0  acc intra edges:  0.4979321360588074  acc inter edges:  0.5
+mu index: 0/7, trial: 1/7, current mu: 0.0001386750490563073
+GCN 		 Loss: 0.6844977 | Train: 0.7820 | Test: 0.7820
+RetroGAT 		 Loss: 0.2223745 | Train: 0.9360 | Test: 0.9360
+GATv3 k=1 		 Loss: 0.6841068 | Train: 0.7920 | Test: 0.7920
+	Head:  0  acc intra edges:  0.49753475189208984  acc inter edges:  0.502560019493103
 
 
-mu index: 0/5, trial: 2/7, current mu: 0.0001386750490563073
-GCN 		 Loss: 0.6836799 | Train: 0.8320 | Test: 0.3660
-RetroGAT 		 Loss: 0.1778747 | Train: 0.9600 | Test: 0.3420
-GATv3 k=1 		 Loss: 0.6838942 | Train: 0.8280 | Test: 0.3840
-	Head:  0  acc intra edges:  0.48950278759002686  acc inter edges:  0.5
+mu index: 0/7, trial: 2/7, current mu: 0.0001386750490563073
+GCN 		 Loss: 0.6651605 | Train: 0.9460 | Test: 0.9460
+RetroGAT 		 Loss: 0.1933734 | Train: 0.9560 | Test: 0.9560
+GATv3 k=1 		 Loss: 0.6648705 | Train: 0.9500 | Test: 0.9500
+	Head:  0  acc intra edges:  0.5024652481079102  acc inter edges:  0.5
 
 
-mu index: 0/5, trial: 3/7, current mu: 0.0001386750490563073
-GCN 		 Loss: 0.6607066 | Train: 0.9460 | Test: 0.4740
-RetroGAT 		 Loss: 0.1985839 | Train: 0.9460 | Test: 0.1520
-GATv3 k=1 		 Loss: 0.6601435 | Train: 0.9500 | Test: 0.4560
-	Head:  0  acc intra edges:  0.5041831135749817  acc inter edges:  0.5
+mu index: 0/7, trial: 3/7, current mu: 0.0001386750490563073
+GCN 		 Loss: 0.6391824 | Train: 0.9920 | Test: 0.9920
+RetroGAT 		 Loss: 0.1977217 | Train: 0.9440 | Test: 0.9440
+GATv3 k=1 		 Loss: 0.6394414 | Train: 0.9920 | Test: 0.9920
+	Head:  0  acc intra edges:  0.4831727147102356  acc inter edges:  0.5
 
 
-mu index: 0/5, trial: 4/7, current mu: 0.0001386750490563073
-GCN 		 Loss: 0.6579795 | Train: 0.9260 | Test: 0.5960
-RetroGAT 		 Loss: 0.1861888 | Train: 0.9500 | Test: 0.6880
-GATv3 k=1 		 Loss: 0.6572116 | Train: 0.9340 | Test: 0.5860
-	Head:  0  acc intra edges:  1.0  acc inter edges:  5.960464477539063e-08
+mu index: 0/7, trial: 4/7, current mu: 0.0001386750490563073
+GCN 		 Loss: 0.6735012 | Train: 0.8960 | Test: 0.8960
+RetroGAT 		 Loss: 0.2054386 | Train: 0.9520 | Test: 0.9520
+GATv3 k=1 		 Loss: 0.6734102 | Train: 0.8960 | Test: 0.8960
+	Head:  0  acc intra edges:  0.5099087357521057  acc inter edges:  0.5
 
 
-mu index: 0/5, trial: 5/7, current mu: 0.0001386750490563073
-GCN 		 Loss: 0.6445925 | Train: 0.9840 | Test: 0.4080
-RetroGAT 		 Loss: 0.1622027 | Train: 0.9640 | Test: 0.4500
-GATv3 k=1 		 Loss: 0.6433758 | Train: 0.9840 | Test: 0.4120
-	Head:  0  acc intra edges:  0.5020679235458374  acc inter edges:  0.5
+mu index: 0/7, trial: 5/7, current mu: 0.0001386750490563073
+GCN 		 Loss: 0.6775906 | Train: 0.8920 | Test: 0.8920
+RetroGAT 		 Loss: 0.2187901 | Train: 0.9460 | Test: 0.9460
+GATv3 k=1 		 Loss: 0.6779636 | Train: 0.8940 | Test: 0.8940
+	Head:  0  acc intra edges:  0.49753475189208984  acc inter edges:  0.5
 
 
-mu index: 0/5, trial: 6/7, current mu: 0.0001386750490563073
-GCN 		 Loss: 0.6649632 | Train: 0.9580 | Test: 0.4600
-RetroGAT 		 Loss: 0.1987412 | Train: 0.9400 | Test: 0.6720
-GATv3 k=1 		 Loss: 0.6658898 | Train: 0.9520 | Test: 0.4480
-	Head:  0  acc intra edges:  0.4979321360588074  acc inter edges:  0.5
+mu index: 0/7, trial: 6/7, current mu: 0.0001386750490563073
+GCN 		 Loss: 0.6613655 | Train: 0.9480 | Test: 0.9480
+RetroGAT 		 Loss: 0.2017806 | Train: 0.9500 | Test: 0.9500
+GATv3 k=1 		 Loss: 0.6619220 | Train: 0.9460 | Test: 0.9460
+	Head:  0  acc intra edges:  0.49893438816070557  acc inter edges:  0.5
 
 
-mu index: 0/5, trial: 7/7, current mu: 0.0001386750490563073
-GCN 		 Loss: 0.6654055 | Train: 0.9720 | Test: 0.6280
-RetroGAT 		 Loss: 0.2078613 | Train: 0.9340 | Test: 0.6260
-GATv3 k=1 		 Loss: 0.6647274 | Train: 0.9740 | Test: 0.6280
-	Head:  0  acc intra edges:  0.5020679235458374  acc inter edges:  0.5
-
-
-
---------------------------------------------------------------------------------
-
-mu index: 1/5, trial: 1/7, current mu: 0.0012707534424918482
-GCN 		 Loss: 0.6700372 | Train: 0.9380 | Test: 0.5920
-RetroGAT 		 Loss: 0.1782143 | Train: 0.9640 | Test: 0.4200
-GATv3 k=1 		 Loss: 0.6691733 | Train: 0.9440 | Test: 0.5920
-	Head:  0  acc intra edges:  0.4979321360588074  acc inter edges:  0.49587172269821167
-
-
-mu index: 1/5, trial: 2/7, current mu: 0.0012707534424918482
-GCN 		 Loss: 0.6680942 | Train: 0.9400 | Test: 0.4280
-RetroGAT 		 Loss: 0.1523603 | Train: 0.9720 | Test: 0.5300
-GATv3 k=1 		 Loss: 0.6683476 | Train: 0.9420 | Test: 0.4400
-	Head:  0  acc intra edges:  0.4979321360588074  acc inter edges:  0.5
-
-
-mu index: 1/5, trial: 3/7, current mu: 0.0012707534424918482
-GCN 		 Loss: 0.6515484 | Train: 0.9920 | Test: 0.5180
-RetroGAT 		 Loss: 0.1523401 | Train: 0.9720 | Test: 0.5020
-GATv3 k=1 		 Loss: 0.6508132 | Train: 0.9920 | Test: 0.5220
-	Head:  0  acc intra edges:  0.5020679235458374  acc inter edges:  0.5
-
-
-mu index: 1/5, trial: 4/7, current mu: 0.0012707534424918482
-GCN 		 Loss: 0.6671278 | Train: 0.9100 | Test: 0.4900
-RetroGAT 		 Loss: 0.2344356 | Train: 0.9300 | Test: 0.4160
-GATv3 k=1 		 Loss: 0.6674161 | Train: 0.9140 | Test: 0.4820
-	Head:  0  acc intra edges:  0.5020679235458374  acc inter edges:  0.5
-
-
-mu index: 1/5, trial: 5/7, current mu: 0.0012707534424918482
-GCN 		 Loss: 0.6625623 | Train: 0.8460 | Test: 0.3820
-RetroGAT 		 Loss: 0.1873738 | Train: 0.9500 | Test: 0.4140
-GATv3 k=1 		 Loss: 0.6628054 | Train: 0.8480 | Test: 0.3900
-	Head:  0  acc intra edges:  0.4979321360588074  acc inter edges:  0.5
-
-
-mu index: 1/5, trial: 6/7, current mu: 0.0012707534424918482
-GCN 		 Loss: 0.6514766 | Train: 0.9500 | Test: 0.3900
-RetroGAT 		 Loss: 0.1794535 | Train: 0.9460 | Test: 0.4460
-GATv3 k=1 		 Loss: 0.6527593 | Train: 0.9520 | Test: 0.4060
-	Head:  0  acc intra edges:  0.5020679235458374  acc inter edges:  0.5
-
-
-mu index: 1/5, trial: 7/7, current mu: 0.0012707534424918482
-GCN 		 Loss: 0.6727040 | Train: 0.7980 | Test: 0.2400
-RetroGAT 		 Loss: 0.1952767 | Train: 0.9460 | Test: 0.4140
-GATv3 k=1 		 Loss: 0.6724720 | Train: 0.8040 | Test: 0.2480
-	Head:  0  acc intra edges:  0.5020679235458374  acc inter edges:  0.5
+mu index: 0/7, trial: 7/7, current mu: 0.0001386750490563073
+GCN 		 Loss: 0.6737221 | Train: 0.9060 | Test: 0.9060
+RetroGAT 		 Loss: 0.1776468 | Train: 0.9680 | Test: 0.9680
+GATv3 k=1 		 Loss: 0.6738252 | Train: 0.9080 | Test: 0.9080
+	Head:  0  acc intra edges:  1.0  acc inter edges:  0.0
 
 
 
 --------------------------------------------------------------------------------
 
-mu index: 2/5, trial: 1/7, current mu: 0.011644591601688997
-GCN 		 Loss: 0.5434834 | Train: 1.0000 | Test: 1.0000
-RetroGAT 		 Loss: 0.1610745 | Train: 0.9620 | Test: 0.7340
-GATv3 k=1 		 Loss: 0.5024979 | Train: 1.0000 | Test: 1.0000
-	Head:  0  acc intra edges:  1.0  acc inter edges:  0.0791521668434143
+mu index: 1/7, trial: 1/7, current mu: 0.0006072585515042242
+GCN 		 Loss: 0.6706346 | Train: 0.8620 | Test: 0.8620
+RetroGAT 		 Loss: 0.2483668 | Train: 0.9140 | Test: 0.9140
+GATv3 k=1 		 Loss: 0.6707233 | Train: 0.8720 | Test: 0.8720
+	Head:  0  acc intra edges:  0.9471800923347473  acc inter edges:  0.01648002862930298
 
 
-mu index: 2/5, trial: 2/7, current mu: 0.011644591601688997
-GCN 		 Loss: 0.5461856 | Train: 1.0000 | Test: 1.0000
-RetroGAT 		 Loss: 0.1487916 | Train: 0.9740 | Test: 0.6300
-GATv3 k=1 		 Loss: 0.5022971 | Train: 1.0000 | Test: 1.0000
-	Head:  0  acc intra edges:  1.0  acc inter edges:  0.4970625638961792
+mu index: 1/7, trial: 2/7, current mu: 0.0006072585515042242
+GCN 		 Loss: 0.6758342 | Train: 0.9020 | Test: 0.9020
+RetroGAT 		 Loss: 0.2012673 | Train: 0.9360 | Test: 0.9360
+GATv3 k=1 		 Loss: 0.6761658 | Train: 0.8960 | Test: 0.8960
+	Head:  0  acc intra edges:  1.0  acc inter edges:  0.0
 
 
-mu index: 2/5, trial: 3/7, current mu: 0.011644591601688997
-GCN 		 Loss: 0.5410496 | Train: 1.0000 | Test: 1.0000
-RetroGAT 		 Loss: 0.1629364 | Train: 0.9680 | Test: 0.7560
-GATv3 k=1 		 Loss: 0.5102642 | Train: 1.0000 | Test: 1.0000
-	Head:  0  acc intra edges:  0.9987687468528748  acc inter edges:  0.5
+mu index: 1/7, trial: 3/7, current mu: 0.0006072585515042242
+GCN 		 Loss: 0.6748463 | Train: 0.8240 | Test: 0.8240
+RetroGAT 		 Loss: 0.1940146 | Train: 0.9520 | Test: 0.9520
+GATv3 k=1 		 Loss: 0.6754891 | Train: 0.8100 | Test: 0.8100
+	Head:  0  acc intra edges:  0.5024493932723999  acc inter edges:  0.5
 
 
-mu index: 2/5, trial: 4/7, current mu: 0.011644591601688997
-GCN 		 Loss: 0.5008873 | Train: 1.0000 | Test: 1.0000
-RetroGAT 		 Loss: 0.1259724 | Train: 0.9780 | Test: 0.7800
-GATv3 k=1 		 Loss: 0.4446876 | Train: 1.0000 | Test: 1.0000
-	Head:  0  acc intra edges:  0.5020679235458374  acc inter edges:  1.0
+mu index: 1/7, trial: 4/7, current mu: 0.0006072585515042242
+GCN 		 Loss: 0.6782646 | Train: 0.8140 | Test: 0.8140
+RetroGAT 		 Loss: 0.2148879 | Train: 0.9360 | Test: 0.9360
+GATv3 k=1 		 Loss: 0.6782829 | Train: 0.8100 | Test: 0.8100
+	Head:  0  acc intra edges:  0.49753475189208984  acc inter edges:  0.5
 
 
-mu index: 2/5, trial: 5/7, current mu: 0.011644591601688997
-GCN 		 Loss: 0.5746020 | Train: 1.0000 | Test: 1.0000
-RetroGAT 		 Loss: 0.1552210 | Train: 0.9700 | Test: 0.8200
-GATv3 k=1 		 Loss: 0.5599793 | Train: 1.0000 | Test: 1.0000
-	Head:  0  acc intra edges:  1.0  acc inter edges:  5.960464477539063e-08
+mu index: 1/7, trial: 5/7, current mu: 0.0006072585515042242
+GCN 		 Loss: 0.6777243 | Train: 0.8860 | Test: 0.8860
+RetroGAT 		 Loss: 0.1650163 | Train: 0.9600 | Test: 0.9600
+GATv3 k=1 		 Loss: 0.6775098 | Train: 0.8880 | Test: 0.8880
+	Head:  0  acc intra edges:  0.5024652481079102  acc inter edges:  0.5
 
 
-mu index: 2/5, trial: 6/7, current mu: 0.011644591601688997
-GCN 		 Loss: 0.5362508 | Train: 1.0000 | Test: 1.0000
-RetroGAT 		 Loss: 0.1387249 | Train: 0.9700 | Test: 0.8720
-GATv3 k=1 		 Loss: 0.4932731 | Train: 1.0000 | Test: 1.0000
-	Head:  0  acc intra edges:  0.1552802324295044  acc inter edges:  1.0
+mu index: 1/7, trial: 6/7, current mu: 0.0006072585515042242
+GCN 		 Loss: 0.6505893 | Train: 0.9740 | Test: 0.9740
+RetroGAT 		 Loss: 0.1863879 | Train: 0.9580 | Test: 0.9580
+GATv3 k=1 		 Loss: 0.6499199 | Train: 0.9760 | Test: 0.9760
+	Head:  0  acc intra edges:  0.5024652481079102  acc inter edges:  0.5005600452423096
 
 
-mu index: 2/5, trial: 7/7, current mu: 0.011644591601688997
-GCN 		 Loss: 0.5437130 | Train: 1.0000 | Test: 0.9940
-RetroGAT 		 Loss: 0.1429814 | Train: 0.9700 | Test: 0.7660
-GATv3 k=1 		 Loss: 0.5113960 | Train: 1.0000 | Test: 0.9980
-	Head:  0  acc intra edges:  1.0  acc inter edges:  0.08002543449401855
-
-
-
---------------------------------------------------------------------------------
-
-mu index: 3/5, trial: 1/7, current mu: 0.10670560396376477
-GCN 		 Loss: 0.0515378 | Train: 1.0000 | Test: 1.0000
-RetroGAT 		 Loss: 0.0125036 | Train: 1.0000 | Test: 1.0000
-GATv3 k=1 		 Loss: 0.0464952 | Train: 1.0000 | Test: 1.0000
-	Head:  0  acc intra edges:  1.0  acc inter edges:  5.960464477539063e-08
-
-
-mu index: 3/5, trial: 2/7, current mu: 0.10670560396376477
-GCN 		 Loss: 0.0518947 | Train: 1.0000 | Test: 1.0000
-RetroGAT 		 Loss: 0.0111966 | Train: 1.0000 | Test: 0.9940
-GATv3 k=1 		 Loss: 0.0462124 | Train: 1.0000 | Test: 1.0000
-	Head:  0  acc intra edges:  1.0  acc inter edges:  0.04668152332305908
-
-
-mu index: 3/5, trial: 3/7, current mu: 0.10670560396376477
-GCN 		 Loss: 0.0550294 | Train: 1.0000 | Test: 1.0000
-RetroGAT 		 Loss: 0.0123820 | Train: 1.0000 | Test: 1.0000
-GATv3 k=1 		 Loss: 0.0452085 | Train: 1.0000 | Test: 1.0000
-	Head:  0  acc intra edges:  1.0  acc inter edges:  5.960464477539063e-08
-
-
-mu index: 3/5, trial: 4/7, current mu: 0.10670560396376477
-GCN 		 Loss: 0.0544687 | Train: 1.0000 | Test: 1.0000
-RetroGAT 		 Loss: 0.0121968 | Train: 1.0000 | Test: 1.0000
-GATv3 k=1 		 Loss: 0.0445950 | Train: 1.0000 | Test: 1.0000
-	Head:  0  acc intra edges:  1.0  acc inter edges:  5.960464477539063e-08
-
-
-mu index: 3/5, trial: 5/7, current mu: 0.10670560396376477
-GCN 		 Loss: 0.0528233 | Train: 1.0000 | Test: 1.0000
-RetroGAT 		 Loss: 0.0114155 | Train: 1.0000 | Test: 1.0000
-GATv3 k=1 		 Loss: 0.0453681 | Train: 1.0000 | Test: 1.0000
-	Head:  0  acc intra edges:  1.0  acc inter edges:  5.960464477539063e-08
-
-
-mu index: 3/5, trial: 6/7, current mu: 0.10670560396376477
-GCN 		 Loss: 0.0536807 | Train: 1.0000 | Test: 1.0000
-RetroGAT 		 Loss: 0.0121024 | Train: 1.0000 | Test: 1.0000
-GATv3 k=1 		 Loss: 0.0449979 | Train: 1.0000 | Test: 1.0000
-	Head:  0  acc intra edges:  1.0  acc inter edges:  5.960464477539063e-08
-
-
-mu index: 3/5, trial: 7/7, current mu: 0.10670560396376477
-GCN 		 Loss: 0.0529595 | Train: 1.0000 | Test: 1.0000
-RetroGAT 		 Loss: 0.0103330 | Train: 1.0000 | Test: 1.0000
-GATv3 k=1 		 Loss: 0.0459886 | Train: 1.0000 | Test: 1.0000
-	Head:  0  acc intra edges:  1.0  acc inter edges:  0.3941727876663208
+mu index: 1/7, trial: 7/7, current mu: 0.0006072585515042242
+GCN 		 Loss: 0.6698546 | Train: 0.8720 | Test: 0.8720
+RetroGAT 		 Loss: 0.1486822 | Train: 0.9660 | Test: 0.9660
+GATv3 k=1 		 Loss: 0.6695750 | Train: 0.8720 | Test: 0.8720
+	Head:  0  acc intra edges:  0.46852439641952515  acc inter edges:  0.5
 
 
 
 --------------------------------------------------------------------------------
 
-mu index: 4/5, trial: 1/7, current mu: 0.9778003649024756
-GCN 		 Loss: 0.0099847 | Train: 1.0000 | Test: 1.0000
-RetroGAT 		 Loss: 0.0099930 | Train: 1.0000 | Test: 1.0000
-GATv3 k=1 		 Loss: 0.0099954 | Train: 1.0000 | Test: 1.0000
-	Head:  0  acc intra edges:  0.5020679235458374  acc inter edges:  0.9957923293113708
+mu index: 2/7, trial: 1/7, current mu: 0.0026591874377147467
+GCN 		 Loss: 0.6600057 | Train: 0.9420 | Test: 0.9420
+RetroGAT 		 Loss: 0.1916676 | Train: 0.9500 | Test: 0.9500
+GATv3 k=1 		 Loss: 0.6605799 | Train: 0.9420 | Test: 0.9420
+	Head:  0  acc intra edges:  0.5005089640617371  acc inter edges:  0.5
 
 
-mu index: 4/5, trial: 2/7, current mu: 0.9778003649024756
-GCN 		 Loss: 0.0099939 | Train: 1.0000 | Test: 1.0000
-RetroGAT 		 Loss: 0.0099929 | Train: 1.0000 | Test: 1.0000
-GATv3 k=1 		 Loss: 0.0099979 | Train: 1.0000 | Test: 1.0000
-	Head:  0  acc intra edges:  0.4979321360588074  acc inter edges:  0.5
+mu index: 2/7, trial: 2/7, current mu: 0.0026591874377147467
+GCN 		 Loss: 0.6395367 | Train: 0.9760 | Test: 0.9760
+RetroGAT 		 Loss: 0.1619398 | Train: 0.9580 | Test: 0.9580
+GATv3 k=1 		 Loss: 0.6385720 | Train: 0.9760 | Test: 0.9760
+	Head:  0  acc intra edges:  0.5025129914283752  acc inter edges:  0.5
 
 
-mu index: 4/5, trial: 3/7, current mu: 0.9778003649024756
-GCN 		 Loss: 0.0099974 | Train: 1.0000 | Test: 1.0000
-RetroGAT 		 Loss: 0.0099924 | Train: 1.0000 | Test: 1.0000
-GATv3 k=1 		 Loss: 0.0099962 | Train: 1.0000 | Test: 1.0000
-	Head:  0  acc intra edges:  1.0  acc inter edges:  0.9996030330657959
+mu index: 2/7, trial: 3/7, current mu: 0.0026591874377147467
+GCN 		 Loss: 0.6721972 | Train: 0.9000 | Test: 0.9000
+RetroGAT 		 Loss: 0.1667310 | Train: 0.9700 | Test: 0.9700
+GATv3 k=1 		 Loss: 0.6718330 | Train: 0.9080 | Test: 0.9080
+	Head:  0  acc intra edges:  0.026338398456573486  acc inter edges:  0.5
 
 
-mu index: 4/5, trial: 4/7, current mu: 0.9778003649024756
-GCN 		 Loss: 0.0099962 | Train: 1.0000 | Test: 1.0000
-RetroGAT 		 Loss: 0.0099951 | Train: 1.0000 | Test: 1.0000
-GATv3 k=1 		 Loss: 0.0099995 | Train: 1.0000 | Test: 1.0000
+mu index: 2/7, trial: 4/7, current mu: 0.0026591874377147467
+GCN 		 Loss: 0.6461840 | Train: 0.9860 | Test: 0.9860
+RetroGAT 		 Loss: 0.1807054 | Train: 0.9580 | Test: 0.9580
+GATv3 k=1 		 Loss: 0.6456331 | Train: 0.9860 | Test: 0.9860
+	Head:  0  acc intra edges:  0.49753475189208984  acc inter edges:  0.5
+
+
+mu index: 2/7, trial: 5/7, current mu: 0.0026591874377147467
+GCN 		 Loss: 0.6711298 | Train: 0.8960 | Test: 0.8960
+RetroGAT 		 Loss: 0.2114669 | Train: 0.9480 | Test: 0.9480
+GATv3 k=1 		 Loss: 0.6710252 | Train: 0.8920 | Test: 0.8920
+	Head:  0  acc intra edges:  0.5024652481079102  acc inter edges:  0.5
+
+
+mu index: 2/7, trial: 6/7, current mu: 0.0026591874377147467
+GCN 		 Loss: 0.6502154 | Train: 0.9800 | Test: 0.9800
+RetroGAT 		 Loss: 0.1696365 | Train: 0.9640 | Test: 0.9640
+GATv3 k=1 		 Loss: 0.6494825 | Train: 0.9800 | Test: 0.9800
+	Head:  0  acc intra edges:  0.5002545118331909  acc inter edges:  0.5
+
+
+mu index: 2/7, trial: 7/7, current mu: 0.0026591874377147467
+GCN 		 Loss: 0.6597454 | Train: 0.9480 | Test: 0.9480
+RetroGAT 		 Loss: 0.1601511 | Train: 0.9600 | Test: 0.9600
+GATv3 k=1 		 Loss: 0.6593307 | Train: 0.9480 | Test: 0.9480
+	Head:  0  acc intra edges:  0.5024652481079102  acc inter edges:  0.5
+
+
+
+--------------------------------------------------------------------------------
+
+mu index: 3/7, trial: 1/7, current mu: 0.011644591601688997
+GCN 		 Loss: 0.5437589 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.1646582 | Train: 0.9640 | Test: 0.9640
+GATv3 k=1 		 Loss: 0.5074880 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  0.00017499923706054688  acc inter edges:  1.0
+
+
+mu index: 3/7, trial: 2/7, current mu: 0.011644591601688997
+GCN 		 Loss: 0.5571110 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.1477071 | Train: 0.9700 | Test: 0.9700
+GATv3 k=1 		 Loss: 0.5352125 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  1.0  acc inter edges:  0.05712002515792847
+
+
+mu index: 3/7, trial: 3/7, current mu: 0.011644591601688997
+GCN 		 Loss: 0.5159045 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.1342472 | Train: 0.9680 | Test: 0.9680
+GATv3 k=1 		 Loss: 0.4704637 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  1.0  acc inter edges:  0.1674399971961975
+
+
+mu index: 3/7, trial: 4/7, current mu: 0.011644591601688997
+GCN 		 Loss: 0.5839099 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.1787871 | Train: 0.9580 | Test: 0.9580
+GATv3 k=1 		 Loss: 0.5836862 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  0.5024652481079102  acc inter edges:  0.5748800039291382
+
+
+mu index: 3/7, trial: 5/7, current mu: 0.011644591601688997
+GCN 		 Loss: 0.5014009 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.1304534 | Train: 0.9740 | Test: 0.9740
+GATv3 k=1 		 Loss: 0.4436765 | Train: 1.0000 | Test: 1.0000
 	Head:  0  acc intra edges:  1.0  acc inter edges:  1.0
 
 
-mu index: 4/5, trial: 5/7, current mu: 0.9778003649024756
-GCN 		 Loss: 0.0099969 | Train: 1.0000 | Test: 1.0000
-RetroGAT 		 Loss: 0.0099892 | Train: 1.0000 | Test: 1.0000
-GATv3 k=1 		 Loss: 0.0099983 | Train: 1.0000 | Test: 1.0000
-	Head:  0  acc intra edges:  1.0  acc inter edges:  0.5
+mu index: 3/7, trial: 6/7, current mu: 0.011644591601688997
+GCN 		 Loss: 0.5393377 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.1309336 | Train: 0.9760 | Test: 0.9760
+GATv3 k=1 		 Loss: 0.5026682 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  1.0  acc inter edges:  0.0
 
 
-mu index: 4/5, trial: 6/7, current mu: 0.9778003649024756
+mu index: 3/7, trial: 7/7, current mu: 0.011644591601688997
+GCN 		 Loss: 0.5405935 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.1508314 | Train: 0.9700 | Test: 0.9700
+GATv3 k=1 		 Loss: 0.5064365 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  5.960464477539063e-08  acc inter edges:  1.0
+
+
+
+--------------------------------------------------------------------------------
+
+mu index: 4/7, trial: 1/7, current mu: 0.05099170959030064
+GCN 		 Loss: 0.1557506 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.0301820 | Train: 0.9960 | Test: 0.9960
+GATv3 k=1 		 Loss: 0.1126080 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  1.0  acc inter edges:  0.02872002124786377
+
+
+mu index: 4/7, trial: 2/7, current mu: 0.05099170959030064
+GCN 		 Loss: 0.1537651 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.0425036 | Train: 0.9960 | Test: 0.9960
+GATv3 k=1 		 Loss: 0.1109925 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  1.0  acc inter edges:  0.1897600293159485
+
+
+mu index: 4/7, trial: 3/7, current mu: 0.05099170959030064
+GCN 		 Loss: 0.1604735 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.0393358 | Train: 0.9980 | Test: 0.9980
+GATv3 k=1 		 Loss: 0.1176543 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  0.15446770191192627  acc inter edges:  1.0
+
+
+mu index: 4/7, trial: 4/7, current mu: 0.05099170959030064
+GCN 		 Loss: 0.1626300 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.0314082 | Train: 1.0000 | Test: 1.0000
+GATv3 k=1 		 Loss: 0.1130142 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  1.0  acc inter edges:  0.001840054988861084
+
+
+mu index: 4/7, trial: 5/7, current mu: 0.05099170959030064
+GCN 		 Loss: 0.1564625 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.0227856 | Train: 1.0000 | Test: 1.0000
+GATv3 k=1 		 Loss: 0.1103945 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  1.0  acc inter edges:  0.04912000894546509
+
+
+mu index: 4/7, trial: 6/7, current mu: 0.05099170959030064
+GCN 		 Loss: 0.1634825 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.0284874 | Train: 1.0000 | Test: 1.0000
+GATv3 k=1 		 Loss: 0.1173396 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  0.40253525972366333  acc inter edges:  1.0
+
+
+mu index: 4/7, trial: 7/7, current mu: 0.05099170959030064
+GCN 		 Loss: 0.1662844 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.0434891 | Train: 0.9920 | Test: 0.9920
+GATv3 k=1 		 Loss: 0.1264784 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  1.0  acc inter edges:  0.894320011138916
+
+
+
+--------------------------------------------------------------------------------
+
+mu index: 5/7, trial: 1/7, current mu: 0.22329288444640835
+GCN 		 Loss: 0.0171753 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.0099986 | Train: 1.0000 | Test: 1.0000
+GATv3 k=1 		 Loss: 0.0172217 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  5.960464477539063e-08  acc inter edges:  1.0
+
+
+mu index: 5/7, trial: 2/7, current mu: 0.22329288444640835
+GCN 		 Loss: 0.0174027 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.0099954 | Train: 1.0000 | Test: 1.0000
+GATv3 k=1 		 Loss: 0.0177259 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  0.5024652481079102  acc inter edges:  0.5249600410461426
+
+
+mu index: 5/7, trial: 3/7, current mu: 0.22329288444640835
+GCN 		 Loss: 0.0180376 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.0099977 | Train: 1.0000 | Test: 1.0000
+GATv3 k=1 		 Loss: 0.0164206 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  5.960464477539063e-08  acc inter edges:  1.0
+
+
+mu index: 5/7, trial: 4/7, current mu: 0.22329288444640835
+GCN 		 Loss: 0.0175576 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.0099982 | Train: 1.0000 | Test: 1.0000
+GATv3 k=1 		 Loss: 0.0179232 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  0.5264815092086792  acc inter edges:  0.5
+
+
+mu index: 5/7, trial: 5/7, current mu: 0.22329288444640835
+GCN 		 Loss: 0.0171465 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.0099993 | Train: 1.0000 | Test: 1.0000
+GATv3 k=1 		 Loss: 0.0160929 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  5.960464477539063e-08  acc inter edges:  1.0
+
+
+mu index: 5/7, trial: 6/7, current mu: 0.22329288444640835
+GCN 		 Loss: 0.0163566 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.0099954 | Train: 1.0000 | Test: 1.0000
+GATv3 k=1 		 Loss: 0.0161902 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  5.960464477539063e-08  acc inter edges:  1.0
+
+
+mu index: 5/7, trial: 7/7, current mu: 0.22329288444640835
+GCN 		 Loss: 0.0163484 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.0099986 | Train: 1.0000 | Test: 1.0000
+GATv3 k=1 		 Loss: 0.0165578 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  5.960464477539063e-08  acc inter edges:  1.0
+
+
+
+--------------------------------------------------------------------------------
+
+mu index: 6/7, trial: 1/7, current mu: 0.9778003649024756
+GCN 		 Loss: 0.0099998 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.0099998 | Train: 1.0000 | Test: 1.0000
+GATv3 k=1 		 Loss: 0.0099955 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  1.0  acc inter edges:  1.0
+
+
+mu index: 6/7, trial: 2/7, current mu: 0.9778003649024756
+GCN 		 Loss: 0.0099917 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.0099939 | Train: 1.0000 | Test: 1.0000
+GATv3 k=1 		 Loss: 0.0099916 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  0.49753475189208984  acc inter edges:  0.5
+
+
+mu index: 6/7, trial: 3/7, current mu: 0.9778003649024756
+GCN 		 Loss: 0.0099912 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.0099904 | Train: 1.0000 | Test: 1.0000
+GATv3 k=1 		 Loss: 0.0099949 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  1.0  acc inter edges:  1.0
+
+
+mu index: 6/7, trial: 4/7, current mu: 0.9778003649024756
+GCN 		 Loss: 0.0099921 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.0099941 | Train: 1.0000 | Test: 1.0000
+GATv3 k=1 		 Loss: 0.0099949 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  0.5024652481079102  acc inter edges:  0.5
+
+
+mu index: 6/7, trial: 5/7, current mu: 0.9778003649024756
+GCN 		 Loss: 0.0099995 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.0099953 | Train: 1.0000 | Test: 1.0000
+GATv3 k=1 		 Loss: 0.0099870 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  1.0  acc inter edges:  1.0
+
+
+mu index: 6/7, trial: 6/7, current mu: 0.9778003649024756
+GCN 		 Loss: 0.0099990 | Train: 1.0000 | Test: 1.0000
+RetroGAT 		 Loss: 0.0099891 | Train: 1.0000 | Test: 1.0000
+GATv3 k=1 		 Loss: 0.0099921 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  0.49753475189208984  acc inter edges:  1.0
+
+
+mu index: 6/7, trial: 7/7, current mu: 0.9778003649024756
 GCN 		 Loss: 0.0099949 | Train: 1.0000 | Test: 1.0000
-RetroGAT 		 Loss: 0.0099842 | Train: 1.0000 | Test: 1.0000
-GATv3 k=1 		 Loss: 0.0099951 | Train: 1.0000 | Test: 1.0000
-	Head:  0  acc intra edges:  0.4979321360588074  acc inter edges:  0.5
-
-
-mu index: 4/5, trial: 7/7, current mu: 0.9778003649024756
-GCN 		 Loss: 0.0099959 | Train: 1.0000 | Test: 1.0000
-RetroGAT 		 Loss: 0.0099989 | Train: 1.0000 | Test: 1.0000
-GATv3 k=1 		 Loss: 0.0099798 | Train: 1.0000 | Test: 1.0000
-	Head:  0  acc intra edges:  1.0  acc inter edges:  1.0
+RetroGAT 		 Loss: 0.0099705 | Train: 1.0000 | Test: 1.0000
+GATv3 k=1 		 Loss: 0.0099966 | Train: 1.0000 | Test: 1.0000
+	Head:  0  acc intra edges:  1.0  acc inter edges:  0.9066399931907654
 
 
 
 --------------------------------------------------------------------------------
 
 SAVING ALL ARRAYS
-Created list saving directory
+List saving directory exists
 
 
 SAVED ALL FILES
-Created list saving directory
+List saving directory exists
 
 
 SAVED ALL FILES
 Number of files: 26
-Created directory
+Directory exists
 
 

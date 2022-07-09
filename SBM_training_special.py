@@ -72,7 +72,7 @@ std_ = 0.1
 mu_up = 20*std_*np.sqrt(np.log(n**2))/(2*np.sqrt(d))
 mu_lb = 0.01*std_/(2*np.sqrt(d))
 
-Nmus = 5
+Nmus = 7
 mus = torch.tensor(np.geomspace(mu_lb.item(), mu_up.item(), Nmus, endpoint=True)).to(device)
 
 epochs = 6000
@@ -180,7 +180,7 @@ for muidx, mu_ in enumerate(mus):
         assert torch.equal(X, X_test) == False, "Training and testing node features are the same"
 
         data.x = X
-        data.x_test = X_test
+        data.x_test = X
         data = data.to(device)
         
         # ------------------------GCN------------------------

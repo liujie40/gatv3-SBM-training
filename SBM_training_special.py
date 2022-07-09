@@ -40,12 +40,18 @@ data = tg.utils.from_networkx(g)
 data = data.to(device)
 gadj = tg.utils.to_dense_adj(data.edge_index).squeeze(0)
 
+SAMEGRAPHTESTING = False
+
 g_test = nx.stochastic_block_model(sizes, probs)
-data_test = tg.utils.from_networkx(g)
+if SAMEGRAPHTESTING:
+    data_test = tg.utils.from_networkx(g)
+else:
+    data_test = tg.utils.from_networkx(g_test)
 data_test = data_test.to(device)
 gadj_test = tg.utils.to_dense_adj(data_test.edge_index).squeeze(0)
 
-# assert torch.equal(gadj, gadj_test) == False, "Training and testing graphs are the same"
+if SAMEGRAPHTESTING:
+    assert torch.equal(gadj, gadj_test) == False, "Training and testing graphs are the same"
 
 data.adj_matrix = gadj
 data.edge_index_test = data_test.edge_index
@@ -53,10 +59,10 @@ data.edge_index_test = data_test.edge_index
 EDGE_ATTR_2 = extract_eigen(1, gadj.unsqueeze(0))
 EDGE_ATTR_2_test = extract_eigen(1, gadj_test.unsqueeze(0))
 
-print (torch.where(EDGE_ATTR_2 > 0)[0])
-print (torch.where(EDGE_ATTR_2 < 0)[0])
-print (torch.where(EDGE_ATTR_2_test > 0)[0])
-print (torch.where(EDGE_ATTR_2_test < 0)[0])
+# print (torch.where(EDGE_ATTR_2 > 0)[0])
+# print (torch.where(EDGE_ATTR_2 < 0)[0])
+# print (torch.where(EDGE_ATTR_2_test > 0)[0])
+# print (torch.where(EDGE_ATTR_2_test < 0)[0])
 
 which_class = 1
 ground_truth = torch.from_numpy(np.concatenate((np.zeros(int(n/2)), np.ones(int(n/2)))))
@@ -72,11 +78,11 @@ std_ = 0.1
 mu_up = 20*std_*np.sqrt(np.log(n**2))/(2*np.sqrt(d))
 mu_lb = 0.01*std_/(2*np.sqrt(d))
 
-Nmus = 7
+Nmus = 2
 mus = torch.tensor(np.geomspace(mu_lb.item(), mu_up.item(), Nmus, endpoint=True)).to(device)
 
-epochs = 6000
-trials = 7
+epochs = 10
+trials = 1
 
 print ("---------CONFIG---------")
 print (f"number of nodes: {n}")
@@ -86,9 +92,9 @@ print (f"number of mus: {Nmus}")
 print (f"trials: {trials}")
 print (f"epochs: {epochs}")
 
-FIGURESAVEPATH = f"figures/SBM_varying_means_training_smallk_special_512dim_samegraph"
-FILEPICKLESAVEPATH = f"pickle/SBM_varying_means_training_eigen1_smallk_special_512dim_samegraph"
-METAPICKLESAVEPATH = f"pickle/SBM_varying_means_training_meta_smallk_special_512dim_samegraph"
+FIGURESAVEPATH = f"figures/SBM_varying_means_training_smallk_special_2dim_samegraph"
+FILEPICKLESAVEPATH = f"pickle/SBM_varying_means_training_eigen1_smallk_special_2dim_samegraph"
+METAPICKLESAVEPATH = f"pickle/SBM_varying_means_training_meta_smallk_special_2dim_samegraph"
 
 print (f"Figures can be found: {FIGURESAVEPATH}")
 print (f"Model pickle files can be found: {FILEPICKLESAVEPATH}")
@@ -101,12 +107,26 @@ test_acc_mlp_gat = []
 test_acc_gatv3_eigen1 = []
 test_acc_gcn = []
 
+train_acc_mlp_gat = []
+train_acc_gatv3_eigen1 = []
+train_acc_gcn = []
+
+train_intra_gamma_eigen1 = []
+train_inter_gamma_eigen1 = []
+train_intra_gamma_std_eigen1 = []
+train_inter_gamma_std_eigen1 = []
+
 intra_gamma_eigen1 = []
 inter_gamma_eigen1 = []
 intra_gamma_std_eigen1 = []
 inter_gamma_std_eigen1 = []
+
 acc_intra_edges_all_eigen1 = []
 acc_inter_edges_all_eigen1 = []
+
+train_acc_intra_edges_all_eigen1 = []
+train_acc_inter_edges_all_eigen1 = []
+
 psi_intra_attn_00_eigen1 = []
 psi_intra_attn_11_eigen1 = []        
 psi_inter_attn_01_eigen1 = []
@@ -116,6 +136,15 @@ psi_intra_attn_11_std_eigen1 = []
 psi_inter_attn_01_std_eigen1 = []
 psi_inter_attn_10_std_eigen1 = []
 
+train_psi_intra_attn_00_eigen1 = []
+train_psi_intra_attn_11_eigen1 = []        
+train_psi_inter_attn_01_eigen1 = []
+train_psi_inter_attn_10_eigen1 = []
+train_psi_intra_attn_00_std_eigen1 = []
+train_psi_intra_attn_11_std_eigen1 = []        
+train_psi_inter_attn_01_std_eigen1 = []
+train_psi_inter_attn_10_std_eigen1 = []
+
 phi_intra_attn_00_retro = []
 phi_intra_attn_11_retro = []        
 phi_inter_attn_01_retro = []
@@ -123,7 +152,16 @@ phi_inter_attn_10_retro = []
 phi_intra_attn_00_std_retro = []
 phi_intra_attn_11_std_retro = []        
 phi_inter_attn_01_std_retro = []
-phi_inter_attn_10_std_retro = []        
+phi_inter_attn_10_std_retro = []   
+
+train_phi_intra_attn_00_retro = []
+train_phi_intra_attn_11_retro = []        
+train_phi_inter_attn_01_retro = []
+train_phi_inter_attn_10_retro = []
+train_phi_intra_attn_00_std_retro = []
+train_phi_intra_attn_11_std_retro = []        
+train_phi_inter_attn_01_std_retro = []
+train_phi_inter_attn_10_std_retro = []   
 
 for muidx, mu_ in enumerate(mus):
 
@@ -131,12 +169,26 @@ for muidx, mu_ in enumerate(mus):
     sum_test_acc_mlp_gat = 0
     sum_test_acc_gatv3_eigen1 = 0
 
+    sum_train_acc_gcn = 0
+    sum_train_acc_mlp_gat = 0
+    sum_train_acc_gatv3_eigen1 = 0
+
     sum_intra_gamma_eigen1 = 0
     sum_inter_gamma_eigen1 = 0
     sum_intra_gamma_std_eigen1 = 0
     sum_inter_gamma_std_eigen1 = 0
+
+    train_sum_intra_gamma_eigen1 = 0
+    train_sum_inter_gamma_eigen1 = 0
+    train_sum_intra_gamma_std_eigen1 = 0
+    train_sum_inter_gamma_std_eigen1 = 0
+
     sum_acc_intra_edges_all_eigen1 = 0
     sum_acc_inter_edges_all_eigen1 = 0
+
+    train_sum_acc_intra_edges_all_eigen1 = 0
+    train_sum_acc_inter_edges_all_eigen1 = 0
+
     sum_psi_intra_attn_00_eigen1 = 0
     sum_psi_intra_attn_11_eigen1 = 0        
     sum_psi_inter_attn_01_eigen1 = 0
@@ -145,6 +197,15 @@ for muidx, mu_ in enumerate(mus):
     sum_psi_intra_attn_11_std_eigen1 = 0        
     sum_psi_inter_attn_01_std_eigen1 = 0
     sum_psi_inter_attn_10_std_eigen1 = 0
+
+    train_sum_psi_intra_attn_00_eigen1 = 0
+    train_sum_psi_intra_attn_11_eigen1 = 0        
+    train_sum_psi_inter_attn_01_eigen1 = 0
+    train_sum_psi_inter_attn_10_eigen1 = 0
+    train_sum_psi_intra_attn_00_std_eigen1 = 0
+    train_sum_psi_intra_attn_11_std_eigen1 = 0        
+    train_sum_psi_inter_attn_01_std_eigen1 = 0
+    train_sum_psi_inter_attn_10_std_eigen1 = 0    
     
     sum_phi_intra_attn_00_retro = 0
     sum_phi_intra_attn_11_retro = 0        
@@ -154,12 +215,21 @@ for muidx, mu_ in enumerate(mus):
     sum_phi_intra_attn_11_std_retro =  0       
     sum_phi_inter_attn_01_std_retro = 0
     sum_phi_inter_attn_10_std_retro = 0
+
+    train_sum_phi_intra_attn_00_retro = 0
+    train_sum_phi_intra_attn_11_retro = 0        
+    train_sum_phi_inter_attn_01_retro = 0
+    train_sum_phi_inter_attn_10_retro = 0
+    train_sum_phi_intra_attn_00_std_retro = 0
+    train_sum_phi_intra_attn_11_std_retro =  0       
+    train_sum_phi_inter_attn_01_std_retro = 0
+    train_sum_phi_inter_attn_10_std_retro = 0
     
     weight_decay = 1.0e-3
     loss_tol = 1.0e-2
 
     for trial in range(trials):
-        print (f"mu index: {muidx}/{len(mus)}, trial: {trial+1}/{trials}, current mu: {mu_}")
+        print (f"mu index: {muidx+1}/{len(mus)}, trial: {trial+1}/{trials}, current mu: {mu_}")
         
         # ------------------------NODE FEATURES------------------------
 
@@ -170,17 +240,20 @@ for muidx, mu_ in enumerate(mus):
         X = X + noise
         X = X.float()
 
-        X_test = torch.zeros((n, d))
-        X_test[:int(n/2)] = -mu_
-        X_test[int(n/2):] = mu_
-        noise = std_ * torch.from_numpy(np.random.randn(n, d))
-        X_test = X_test + noise
-        X_test = X_test.float()
-        
-        assert torch.equal(X, X_test) == False, "Training and testing node features are the same"
-
         data.x = X
-        data.x_test = X
+        if SAMEGRAPHTESTING:
+            data.x_test = X
+        else:
+            X_test = torch.zeros((n, d))
+            X_test[:int(n/2)] = -mu_
+            X_test[int(n/2):] = mu_
+            noise = std_ * torch.from_numpy(np.random.randn(n, d))
+            X_test = X_test + noise
+            X_test = X_test.float()
+
+            data.x_test = X_test
+            
+            assert torch.equal(X, X_test) == False, "Training and testing node features are the same"
         data = data.to(device)
         
         # ------------------------GCN------------------------
@@ -188,15 +261,20 @@ for muidx, mu_ in enumerate(mus):
         loss, train_acc, test_acc = run_gcn(data, d=data.x.shape[1], out_d=1, device=device, weight_decay=weight_decay, loss_tol=loss_tol, epochs=epochs)
         print(f"GCN \t\t Loss: {loss:.7f} | Train: {train_acc:0.4f} | Test: {test_acc:0.4f}")
         sum_test_acc_gcn += test_acc
+        sum_train_acc_gcn += train_acc
 
         # ------------------------RetroGAT------------------------
 
         loss, train_acc, test_acc, model_mlp_gat = run_mlp_gat(data, d=data.x.shape[1], out_d=1, device=device, weight_decay=weight_decay, loss_tol=loss_tol, epochs=epochs)
         print(f"RetroGAT \t\t Loss: {loss:.7f} | Train: {train_acc:0.4f} | Test: {test_acc:0.4f}")
         sum_test_acc_mlp_gat += test_acc
+        sum_train_acc_mlp_gat += train_acc
         
-        logits, attn_weights, pair_pred = model_mlp_gat(data)
+        logits, attn_weights, pair_pred = model_mlp_gat(data, train=False)
         phi_intra_weight_00, phi_intra_weight_11, _, phi_inter_weight_01, phi_inter_weight_10, _ = info_mlp_gat_scores_phi(attn_weights, idx)
+
+        train_logits, train_attn_weights, train_pair_pred = model_mlp_gat(data, train=True)
+        train_phi_intra_weight_00, train_phi_intra_weight_11, _, train_phi_inter_weight_01, train_phi_inter_weight_10, _ = info_mlp_gat_scores_phi(train_attn_weights, idx)
         
         sum_phi_intra_attn_00_retro += np.asarray(phi_intra_weight_00).mean()
         sum_phi_intra_attn_11_retro += np.asarray(phi_intra_weight_11).mean()   
@@ -207,6 +285,16 @@ for muidx, mu_ in enumerate(mus):
         sum_phi_intra_attn_11_std_retro += np.asarray(phi_intra_weight_11).std()       
         sum_phi_inter_attn_01_std_retro += np.asarray(phi_inter_weight_01).std() 
         sum_phi_inter_attn_10_std_retro += np.asarray(phi_inter_weight_10).mean()
+
+        train_sum_phi_intra_attn_00_retro += np.asarray(train_phi_intra_weight_00).mean()
+        train_sum_phi_intra_attn_11_retro += np.asarray(train_phi_intra_weight_11).mean()   
+        train_sum_phi_inter_attn_01_retro += np.asarray(train_phi_inter_weight_01).mean()   
+        train_sum_phi_inter_attn_10_retro += np.asarray(train_phi_inter_weight_10).mean()   
+
+        train_sum_phi_intra_attn_00_std_retro += np.asarray(train_phi_intra_weight_00).std()
+        train_sum_phi_intra_attn_11_std_retro += np.asarray(train_phi_intra_weight_11).std()       
+        train_sum_phi_inter_attn_01_std_retro += np.asarray(train_phi_inter_weight_01).std() 
+        train_sum_phi_inter_attn_10_std_retro += np.asarray(train_phi_inter_weight_10).mean()
         
         # ------------------------GATv3------------------------
 
@@ -216,15 +304,31 @@ for muidx, mu_ in enumerate(mus):
         loss, train_acc, test_acc, model_GATv3 = run_GATv3(data, d=data.x.shape[1], out_d=1, k=1, device=device, weight_decay=weight_decay, loss_tol=loss_tol, epochs=epochs)
         print(f"GATv3 k=1 \t\t Loss: {loss:.7f} | Train: {train_acc:0.4f} | Test: {test_acc:0.4f}")
         sum_test_acc_gatv3_eigen1 += test_acc
+        sum_train_acc_gatv3_eigen1 += train_acc
 
-        logits, attn_weights, pair_pred = model_GATv3(data) 
+        train_logits, train_attn_weights, train_pair_pred = model_GATv3(data, train=True)
+        train_intra_weight, train_idx_intra, train_inter_weight, train_idx_inter = info_gatv3_gamma(train_attn_weights, idx)
+
+        logits, attn_weights, pair_pred = model_GATv3(data, train=False) 
         intra_weight, idx_intra, inter_weight, idx_inter = info_gatv3_gamma(attn_weights, idx)
+        
         psi_intra_weight_00, psi_intra_weight_11, _, psi_inter_weight_01, psi_inter_weight_10, _ = info_gatv3_scores_psi(attn_weights, idx)
+        train_psi_intra_weight_00, train_psi_intra_weight_11, _, train_psi_inter_weight_01, train_psi_inter_weight_10, _ = info_gatv3_scores_psi(train_attn_weights, idx)
 
         sum_intra_gamma_eigen1 += np.asarray(intra_weight).mean()
         sum_inter_gamma_eigen1 += np.asarray(inter_weight).mean()
         sum_intra_gamma_std_eigen1 += np.asarray(intra_weight).std()
         sum_inter_gamma_std_eigen1 += np.asarray(inter_weight).std()
+
+        train_sum_intra_gamma_eigen1 += np.asarray(train_intra_weight).mean()
+        train_sum_inter_gamma_eigen1 += np.asarray(train_inter_weight).mean()
+        train_sum_intra_gamma_std_eigen1 += np.asarray(train_intra_weight).std()
+        train_sum_inter_gamma_std_eigen1 += np.asarray(train_inter_weight).std()
+
+        train_acc_intra_edges, train_acc_inter_edges = pair_acc(train_attn_weights[0][0].shape[0], train_pair_pred, train_idx_intra, train_idx_inter, 0)
+        train_sum_acc_intra_edges_all_eigen1 += train_acc_intra_edges.cpu()
+        train_sum_acc_inter_edges_all_eigen1 += train_acc_inter_edges.cpu()
+        
         acc_intra_edges, acc_inter_edges = pair_acc(attn_weights[0][0].shape[0], pair_pred, idx_intra, idx_inter, 0)
         sum_acc_intra_edges_all_eigen1 += acc_intra_edges.cpu()
         sum_acc_inter_edges_all_eigen1 += acc_inter_edges.cpu()
@@ -239,19 +343,42 @@ for muidx, mu_ in enumerate(mus):
         sum_psi_inter_attn_01_std_eigen1 += np.asarray(psi_inter_weight_01).std() 
         sum_psi_inter_attn_10_std_eigen1 += np.asarray(psi_inter_weight_10).mean()  
 
+        train_sum_psi_intra_attn_00_eigen1 += np.asarray(train_psi_intra_weight_00).mean()
+        train_sum_psi_intra_attn_11_eigen1 += np.asarray(train_psi_intra_weight_11).mean()   
+        train_sum_psi_inter_attn_01_eigen1 += np.asarray(train_psi_inter_weight_01).mean()   
+        train_sum_psi_inter_attn_10_eigen1 += np.asarray(train_psi_inter_weight_10).mean()   
+
+        train_sum_psi_intra_attn_00_std_eigen1 += np.asarray(train_psi_intra_weight_00).std()
+        train_sum_psi_intra_attn_11_std_eigen1 += np.asarray(train_psi_intra_weight_11).std()       
+        train_sum_psi_inter_attn_01_std_eigen1 += np.asarray(train_psi_inter_weight_01).std() 
+        train_sum_psi_inter_attn_10_std_eigen1 += np.asarray(train_psi_inter_weight_10).mean()  
+
         print ("\n")
 
     test_acc_gcn.append(sum_test_acc_gcn/trials)
     test_acc_mlp_gat.append(sum_test_acc_mlp_gat/trials)
     test_acc_gatv3_eigen1.append(sum_test_acc_gatv3_eigen1/trials)
 
+    train_acc_gcn.append(sum_train_acc_gcn/trials)
+    train_acc_mlp_gat.append(sum_train_acc_mlp_gat/trials)
+    train_acc_gatv3_eigen1.append(sum_train_acc_gatv3_eigen1/trials)
+
     intra_gamma_eigen1.append(sum_intra_gamma_eigen1/trials)
     inter_gamma_eigen1.append(sum_inter_gamma_eigen1/trials)
     intra_gamma_std_eigen1.append(sum_intra_gamma_std_eigen1/trials)
     inter_gamma_std_eigen1.append(sum_inter_gamma_std_eigen1/trials)
 
+    train_intra_gamma_eigen1.append(train_sum_intra_gamma_eigen1/trials)
+    train_inter_gamma_eigen1.append(train_sum_inter_gamma_eigen1/trials)
+    train_intra_gamma_std_eigen1.append(train_sum_intra_gamma_std_eigen1/trials)
+    train_inter_gamma_std_eigen1.append(train_sum_inter_gamma_std_eigen1/trials)
+
     acc_intra_edges_all_eigen1.append(sum_acc_intra_edges_all_eigen1/trials)
     acc_inter_edges_all_eigen1.append(sum_acc_inter_edges_all_eigen1/trials)
+
+    train_acc_intra_edges_all_eigen1.append(train_sum_acc_intra_edges_all_eigen1/trials)
+    train_acc_inter_edges_all_eigen1.append(train_sum_acc_inter_edges_all_eigen1/trials)
+
     psi_intra_attn_00_eigen1.append(sum_psi_intra_attn_00_eigen1/trials)    
     psi_intra_attn_11_eigen1.append(sum_psi_intra_attn_11_eigen1/trials) 
     psi_inter_attn_01_eigen1.append(sum_psi_inter_attn_01_eigen1/trials) 
@@ -260,6 +387,15 @@ for muidx, mu_ in enumerate(mus):
     psi_intra_attn_11_std_eigen1.append(sum_psi_intra_attn_11_std_eigen1/trials) 
     psi_inter_attn_01_std_eigen1.append(sum_psi_inter_attn_01_std_eigen1/trials) 
     psi_inter_attn_10_std_eigen1.append(sum_psi_inter_attn_10_std_eigen1/trials)
+
+    train_psi_intra_attn_00_eigen1.append(train_sum_psi_intra_attn_00_eigen1/trials)    
+    train_psi_intra_attn_11_eigen1.append(train_sum_psi_intra_attn_11_eigen1/trials) 
+    train_psi_inter_attn_01_eigen1.append(train_sum_psi_inter_attn_01_eigen1/trials) 
+    train_psi_inter_attn_10_eigen1.append(train_sum_psi_inter_attn_10_eigen1/trials)
+    train_psi_intra_attn_00_std_eigen1.append(train_sum_psi_intra_attn_00_std_eigen1/trials)    
+    train_psi_intra_attn_11_std_eigen1.append(train_sum_psi_intra_attn_11_std_eigen1/trials) 
+    train_psi_inter_attn_01_std_eigen1.append(train_sum_psi_inter_attn_01_std_eigen1/trials) 
+    train_psi_inter_attn_10_std_eigen1.append(train_sum_psi_inter_attn_10_std_eigen1/trials)    
 
     phi_intra_attn_00_retro.append(sum_phi_intra_attn_00_retro/trials)    
     phi_intra_attn_11_retro.append(sum_phi_intra_attn_11_retro/trials) 
@@ -270,18 +406,34 @@ for muidx, mu_ in enumerate(mus):
     phi_inter_attn_01_std_retro.append(sum_phi_inter_attn_01_std_retro/trials) 
     phi_inter_attn_10_std_retro.append(sum_phi_inter_attn_10_std_retro/trials)
 
+    train_phi_intra_attn_00_retro.append(train_sum_phi_intra_attn_00_retro/trials)    
+    train_phi_intra_attn_11_retro.append(train_sum_phi_intra_attn_11_retro/trials) 
+    train_phi_inter_attn_01_retro.append(train_sum_phi_inter_attn_01_retro/trials) 
+    train_phi_inter_attn_10_retro.append(train_sum_phi_inter_attn_10_retro/trials)
+    train_phi_intra_attn_00_std_retro.append(train_sum_phi_intra_attn_00_std_retro/trials)    
+    train_phi_intra_attn_11_std_retro.append(train_sum_phi_intra_attn_11_std_retro/trials) 
+    train_phi_inter_attn_01_std_retro.append(train_sum_phi_inter_attn_01_std_retro/trials) 
+    train_phi_inter_attn_10_std_retro.append(train_sum_phi_inter_attn_10_std_retro/trials)
+
     print ("\n--------------------------------------------------------------------------------\n")
     
 # ------------------------SAVEING FILES------------------------    
 
 allfiles2 = {
     "test_acc_gatv3_eigen1": test_acc_gatv3_eigen1,
+    "train_acc_gatv3_eigen1": train_acc_gatv3_eigen1,
     "intra_gamma_eigen1": intra_gamma_eigen1,
     "inter_gamma_eigen1": inter_gamma_eigen1,
     "intra_gamma_std_eigen1": intra_gamma_std_eigen1,
     "inter_gamma_std_eigen1": inter_gamma_std_eigen1,
+    "train_intra_gamma_eigen1": train_intra_gamma_eigen1,
+    "train_inter_gamma_eigen1": train_inter_gamma_eigen1,
+    "train_intra_gamma_std_eigen1": train_intra_gamma_std_eigen1,
+    "train_inter_gamma_std_eigen1": train_inter_gamma_std_eigen1,
     "acc_intra_edges_all_eigen1": acc_intra_edges_all_eigen1,
     "acc_inter_edges_all_eigen1": acc_inter_edges_all_eigen1,
+    "train_acc_intra_edges_all_eigen1": train_acc_intra_edges_all_eigen1,
+    "train_acc_inter_edges_all_eigen1": train_acc_inter_edges_all_eigen1,
     "psi_intra_attn_00_eigen1": psi_intra_attn_00_eigen1,
     "psi_intra_attn_11_eigen1": psi_intra_attn_11_eigen1,
     "psi_inter_attn_01_eigen1": psi_inter_attn_01_eigen1,
@@ -290,11 +442,21 @@ allfiles2 = {
     "psi_intra_attn_11_std_eigen1": psi_intra_attn_11_std_eigen1,
     "psi_inter_attn_01_std_eigen1": psi_inter_attn_01_std_eigen1,
     "psi_inter_attn_10_std_eigen1": psi_inter_attn_10_std_eigen1,
+    "train_psi_intra_attn_00_eigen1": train_psi_intra_attn_00_eigen1,
+    "train_psi_intra_attn_11_eigen1": train_psi_intra_attn_11_eigen1,
+    "train_psi_inter_attn_01_eigen1": train_psi_inter_attn_01_eigen1,
+    "train_psi_inter_attn_10_eigen1": train_psi_inter_attn_10_eigen1,
+    "train_psi_intra_attn_00_std_eigen1": train_psi_intra_attn_00_std_eigen1,
+    "train_psi_intra_attn_11_std_eigen1": train_psi_intra_attn_11_std_eigen1,
+    "train_psi_inter_attn_01_std_eigen1": train_psi_inter_attn_01_std_eigen1,
+    "train_psi_inter_attn_10_std_eigen1": train_psi_inter_attn_10_std_eigen1
 }
 
 metafiles = {
     "test_acc_gcn": test_acc_gcn,
+    "train_acc_gcn": train_acc_gcn,
     "test_acc_mlp_gat": test_acc_mlp_gat,
+    "train_acc_mlp_gat": train_acc_mlp_gat,
     "phi_intra_attn_00_retro": phi_intra_attn_00_retro,
     "phi_intra_attn_11_retro": phi_intra_attn_11_retro,
     "phi_inter_attn_01_retro": phi_inter_attn_01_retro,
@@ -303,10 +465,16 @@ metafiles = {
     "phi_intra_attn_11_std_retro": phi_intra_attn_11_std_retro,
     "phi_inter_attn_01_std_retro": phi_inter_attn_01_std_retro,
     "phi_inter_attn_10_std_retro": phi_inter_attn_10_std_retro,
+    "train_phi_intra_attn_00_retro": train_phi_intra_attn_00_retro,
+    "train_phi_intra_attn_11_retro": train_phi_intra_attn_11_retro,
+    "train_phi_inter_attn_01_retro": train_phi_inter_attn_01_retro,
+    "train_phi_inter_attn_10_retro": train_phi_inter_attn_10_retro,
+    "train_phi_intra_attn_00_std_retro": train_phi_intra_attn_00_std_retro,
+    "train_phi_intra_attn_11_std_retro": train_phi_intra_attn_11_std_retro,
+    "train_phi_inter_attn_01_std_retro": train_phi_inter_attn_01_std_retro,
+    "train_phi_inter_attn_10_std_retro": train_phi_inter_attn_10_std_retro,
     "mus": mus.cpu()
 }
-
-
 
 print ("SAVING ALL ARRAYS")
 

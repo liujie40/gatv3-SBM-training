@@ -68,9 +68,9 @@ class GATv3Psi(torch.nn.Module):
             out_channels=out_d,
             num_eigenvectors=k,
             node_att_in_channels=2,
-            node_att_out_channels=512,
+            node_att_out_channels=2,
             edge_att_in_channels = 2*k,
-            edge_att_out_channels = 512,
+            edge_att_out_channels = 2,
             share_weights=True, 
             bias=False
         )
@@ -377,10 +377,12 @@ def my_plot(name, which_class, allfiles_plotting, parent_path, show_linear=False
     
     fig = plt.figure(figsize=(11, 7), dpi=80)
 
-    plt.plot(allqs, allfiles_plotting["intra_gamma_eigen1"], linewidth=2, linestyle='-', marker='*', markersize=9, label='Average $\gamma$, intra edges, GATv3 k=1')
-    plt.plot(allqs, allfiles_plotting["inter_gamma_eigen1"], linewidth=2, linestyle='-', marker='X', markersize=9, label='Average $\gamma$, inter edges, GATv3 k=1')
+    plt.plot(allqs, allfiles_plotting["intra_gamma_eigen1"], linewidth=2, linestyle='-', marker='*', markersize=9, label='Average $\gamma$, test, intra edges, GATv3 k=1')
+    plt.plot(allqs, allfiles_plotting["inter_gamma_eigen1"], linewidth=2, linestyle='-', marker='X', markersize=9, label='Average $\gamma$, test, inter edges, GATv3 k=1')
+    plt.plot(allqs, allfiles_plotting["train_intra_gamma_eigen1"], linewidth=2, linestyle='-', marker='*', markersize=9, label='Average $\gamma$, train, intra edges, GATv3 k=1')
+    plt.plot(allqs, allfiles_plotting["train_inter_gamma_eigen1"], linewidth=2, linestyle='-', marker='X', markersize=9, label='Average $\gamma$, train, inter edges, GATv3 k=1')
 
-    plt.title(f"Dataset: {name} | Class: {which_class} | Gammas")
+    plt.title(f"Class: {which_class} | Gammas")
     plt.grid(linestyle='dashed')
     plt.legend(fontsize=20)
     plt.xscale('log')
@@ -396,10 +398,12 @@ def my_plot(name, which_class, allfiles_plotting, parent_path, show_linear=False
     
     fig = plt.figure(figsize=(11, 7), dpi=80)
 
-    plt.plot(allqs, allfiles_plotting["intra_gamma_std_eigen1"], linewidth=2, linestyle='-', marker='*', markersize=9, label='Stand. dev. $\gamma$, intra edges, GATv3 k=1')
-    plt.plot(allqs, allfiles_plotting["inter_gamma_std_eigen1"], linewidth=2, linestyle='-', marker='X', markersize=9, label='Stand. dev. $\gamma$, inter edges, GATv3 k=1')
+    plt.plot(allqs, allfiles_plotting["intra_gamma_std_eigen1"], linewidth=2, linestyle='-', marker='*', markersize=9, label='Stand. dev. $\gamma$, test, intra edges, GATv3 k=1')
+    plt.plot(allqs, allfiles_plotting["inter_gamma_std_eigen1"], linewidth=2, linestyle='-', marker='X', markersize=9, label='Stand. dev. $\gamma$, test, inter edges, GATv3 k=1')
+    plt.plot(allqs, allfiles_plotting["train_intra_gamma_std_eigen1"], linewidth=2, linestyle='-', marker='*', markersize=9, label='Stand. dev. $\gamma$, train, intra edges, GATv3 k=1')
+    plt.plot(allqs, allfiles_plotting["train_inter_gamma_std_eigen1"], linewidth=2, linestyle='-', marker='X', markersize=9, label='Stand. dev. $\gamma$, train, inter edges, GATv3 k=1')
     
-    plt.title(f"Dataset: {name} | Class: {which_class} vs All | Gammas Std Dev")
+    plt.title(f"SBM | Gammas Std Dev")
     plt.grid(linestyle='dashed')
     plt.legend(fontsize=20)
     plt.xscale('log')
@@ -416,7 +420,7 @@ def my_plot(name, which_class, allfiles_plotting, parent_path, show_linear=False
     marker_intra = ['v','^','>','<']
     marker_inter = ['1','2','3','4']
     
-    # ---------------------------------------NODE CLASSIFICATION---------------------------------------
+    # ---------------------------------------NODE CLASSIFICATION TEST---------------------------------------
     
     fig = plt.figure(figsize=(11, 7), dpi=80)
 
@@ -424,7 +428,7 @@ def my_plot(name, which_class, allfiles_plotting, parent_path, show_linear=False
     plt.plot(allqs, allfiles_plotting["test_acc_mlp_gat"], linewidth=2, linestyle='-', marker='+', markersize=9,label='GAT Retro')
     plt.plot(allqs, allfiles_plotting["test_acc_gatv3_eigen1"], linewidth=2, linestyle='-', marker='*', markersize=9, label='GATv3 k=1')
 
-    plt.title(f"Dataset: {name} | Class: {which_class} vs All | Node Classification")
+    plt.title(f"SBM | Testing Node Classification")
     plt.grid(linestyle='dashed')
     plt.legend(fontsize=20)
     plt.xscale('log')
@@ -434,16 +438,36 @@ def my_plot(name, which_class, allfiles_plotting, parent_path, show_linear=False
     plt.ylabel('Classification accuracy', fontsize=20)
     # plt.show()
     
-    fig.savefig(parent_path + "/node_classification_real_data_ansatz_"+name+".pdf", dpi=400, bbox_inches='tight')
+    fig.savefig(parent_path + "/node_classification_test_real_data_ansatz_"+name+".pdf", dpi=400, bbox_inches='tight')
+
+    # ---------------------------------------NODE CLASSIFICATION TRAIN---------------------------------------
     
-    # ---------------------------------------EDGE CLASSIFICATION---------------------------------------
+    fig = plt.figure(figsize=(11, 7), dpi=80)
+
+    plt.plot(allqs, allfiles_plotting["train_acc_gcn"], linewidth=2, linestyle='-', marker='s', markersize=9, label='GCN')
+    plt.plot(allqs, allfiles_plotting["train_acc_mlp_gat"], linewidth=2, linestyle='-', marker='+', markersize=9,label='GAT Retro')
+    plt.plot(allqs, allfiles_plotting["train_acc_gatv3_eigen1"], linewidth=2, linestyle='-', marker='*', markersize=9, label='GATv3 k=1')
+
+    plt.title(f"SBM | Training Node Classification")
+    plt.grid(linestyle='dashed')
+    plt.legend(fontsize=20)
+    plt.xscale('log')
+    plt.tick_params(axis='x', labelsize=18)
+    plt.tick_params(axis='y', labelsize=18)
+    plt.xlabel(XAXISLABEL, fontsize=20)
+    plt.ylabel('Classification accuracy', fontsize=20)
+    # plt.show()
+    
+    fig.savefig(parent_path + "/node_classification_train_real_data_ansatz_"+name+".pdf", dpi=400, bbox_inches='tight')
+    
+    # ---------------------------------------EDGE CLASSIFICATION TEST---------------------------------------
     
     fig = plt.figure(figsize=(11, 7), dpi=80)
 
     plt.plot(allqs, allfiles_plotting["acc_intra_edges_all_eigen1"], linewidth=2, linestyle='-', marker='*', markersize=9, label='GATv3 k=1, intra edge classification')
     plt.plot(allqs, allfiles_plotting["acc_inter_edges_all_eigen1"], linewidth=2, linestyle='-', marker='X', markersize=9, label='GATv3 k=1, inter edge classification')
 
-    plt.title(f"Dataset: {name} | Class: {which_class} vs All | Edge Classification")
+    plt.title(f"SBM | Testing Edge Classification")
     plt.grid(linestyle='dashed')
     plt.legend(fontsize=20)
     plt.xscale('log')
@@ -453,9 +477,28 @@ def my_plot(name, which_class, allfiles_plotting, parent_path, show_linear=False
     plt.ylabel('Classification accuracy', fontsize=20)
     # plt.show()
     
-    fig.savefig(parent_path + "/edge_classification_real_data_ansatz_"+name+".pdf", dpi=400, bbox_inches='tight')
+    fig.savefig(parent_path + "/edge_classification_test_real_data_ansatz_"+name+".pdf", dpi=400, bbox_inches='tight')
+
+    # ---------------------------------------EDGE CLASSIFICATION TEST---------------------------------------
     
-    # ---------------------------------------PSI k=1---------------------------------------
+    fig = plt.figure(figsize=(11, 7), dpi=80)
+
+    plt.plot(allqs, allfiles_plotting["train_acc_intra_edges_all_eigen1"], linewidth=2, linestyle='-', marker='*', markersize=9, label='GATv3 k=1, intra edge classification')
+    plt.plot(allqs, allfiles_plotting["train_acc_inter_edges_all_eigen1"], linewidth=2, linestyle='-', marker='X', markersize=9, label='GATv3 k=1, inter edge classification')
+
+    plt.title(f"SBM | Training Edge Classification")
+    plt.grid(linestyle='dashed')
+    plt.legend(fontsize=20)
+    plt.xscale('log')
+    plt.tick_params(axis='x', labelsize=18)
+    plt.tick_params(axis='y', labelsize=18)
+    plt.xlabel(XAXISLABEL, fontsize=20)
+    plt.ylabel('Classification accuracy', fontsize=20)
+    # plt.show()
+    
+    fig.savefig(parent_path + "/edge_classification_train_real_data_ansatz_"+name+".pdf", dpi=400, bbox_inches='tight')
+    
+    # ---------------------------------------PSI k=1 TEST---------------------------------------
 
     fig = plt.figure(figsize=(11, 7), dpi=80)
 
@@ -478,12 +521,40 @@ def my_plot(name, which_class, allfiles_plotting, parent_path, show_linear=False
     plt.tick_params(axis='y', labelsize=18)
     plt.xlabel(XAXISLABEL, fontsize=20)
     plt.ylabel('$\Psi$ Values', fontsize=20)
-    plt.title("$\Psi$ Values for GATv3 k=1")
+    plt.title("Testing $\Psi$ Values for GATv3 k=1")
     # plt.show()
 
-    fig.savefig(parent_path + "/gatv3_psi_values_real_data_ansatz_"+name+"k1.pdf", dpi=400, bbox_inches='tight')
+    fig.savefig(parent_path + "/gatv3_psi_values_test_real_data_ansatz_"+name+"k1.pdf", dpi=400, bbox_inches='tight')
+
+    # ---------------------------------------PSI k=1 TRAIN---------------------------------------
+
+    fig = plt.figure(figsize=(11, 7), dpi=80)
+
+    plt.plot(allqs, allfiles_plotting["train_psi_intra_attn_00_eigen1"], label="$i \in C_0, j \in C_0$", linewidth=2, linestyle="-", markersize=9, marker="*")
+    plt.fill_between(allqs, np.asarray(allfiles_plotting["train_psi_intra_attn_00_eigen1"])-np.asarray(allfiles_plotting["train_psi_intra_attn_00_std_eigen1"]), np.asarray(allfiles_plotting["train_psi_intra_attn_00_eigen1"])+np.asarray(allfiles_plotting["train_psi_intra_attn_00_std_eigen1"]), alpha=0.4)
+
+    plt.plot(allqs, allfiles_plotting["train_psi_intra_attn_11_eigen1"], label="$i \in C_1, j \in C_1$", linewidth=2, linestyle="-", markersize=9, marker="X")
+    plt.fill_between(allqs, np.asarray(allfiles_plotting["train_psi_intra_attn_11_eigen1"])-np.asarray(allfiles_plotting["train_psi_intra_attn_11_std_eigen1"]), np.asarray(allfiles_plotting["train_psi_intra_attn_11_eigen1"])+np.asarray(allfiles_plotting["train_psi_intra_attn_11_std_eigen1"]), alpha=0.4)
+
+    plt.plot(allqs, allfiles_plotting["train_psi_inter_attn_10_eigen1"], label="$i \in C_1, j \in C_0$", linewidth=2, linestyle="-", markersize=9, marker="+")
+    plt.fill_between(allqs, np.asarray(allfiles_plotting["train_psi_inter_attn_10_eigen1"])-np.asarray(allfiles_plotting["train_psi_inter_attn_10_std_eigen1"]), np.asarray(allfiles_plotting["train_psi_inter_attn_10_eigen1"])+np.asarray(allfiles_plotting["train_psi_inter_attn_10_std_eigen1"]), alpha=0.4)
+
+    plt.plot(allqs, allfiles_plotting["train_psi_inter_attn_01_eigen1"], label="$i \in C_0, j \in C_1$", linewidth=2, linestyle="-", markersize=9, marker="o")
+    plt.fill_between(allqs, np.asarray(allfiles_plotting["train_psi_inter_attn_01_eigen1"])-np.asarray(allfiles_plotting["train_psi_inter_attn_01_std_eigen1"]), np.asarray(allfiles_plotting["train_psi_inter_attn_01_eigen1"])+np.asarray(allfiles_plotting["train_psi_inter_attn_01_std_eigen1"]), alpha=0.4)
+
+    plt.grid(linestyle="dashed")
+    plt.legend(fontsize=20)
+    plt.xscale('log')
+    plt.tick_params(axis='x', labelsize=18)
+    plt.tick_params(axis='y', labelsize=18)
+    plt.xlabel(XAXISLABEL, fontsize=20)
+    plt.ylabel('$\Psi$ Values', fontsize=20)
+    plt.title("Training $\Psi$ Values for GATv3 k=1")
+    # plt.show()
+
+    fig.savefig(parent_path + "/gatv3_psi_values_train_real_data_ansatz_"+name+"k1.pdf", dpi=400, bbox_inches='tight')
     
-    # ---------------------------------------PHI k=1---------------------------------------
+    # ---------------------------------------PHI k=1 TEST---------------------------------------
 
     fig = plt.figure(figsize=(11, 7), dpi=80)
 
@@ -506,10 +577,38 @@ def my_plot(name, which_class, allfiles_plotting, parent_path, show_linear=False
     plt.tick_params(axis='y', labelsize=18)
     plt.xlabel(XAXISLABEL, fontsize=20)
     plt.ylabel('$\Phi$ Values', fontsize=20)
-    plt.title("$\Phi$ Values for RetroGAT")
+    plt.title("Testing $\Phi$ Values for RetroGAT")
     # plt.show()
 
-    fig.savefig(parent_path + "/retro_phi_values_real_data_ansatz_"+name+".pdf", dpi=400, bbox_inches='tight')
+    fig.savefig(parent_path + "/retro_phi_values_test_real_data_ansatz_"+name+".pdf", dpi=400, bbox_inches='tight')
+    
+    # ---------------------------------------PHI k=1 TRAIN---------------------------------------
+
+    fig = plt.figure(figsize=(11, 7), dpi=80)
+
+    plt.plot(allqs, allfiles_plotting["train_phi_intra_attn_00_retro"], label="$i \in C_0, j \in C_0$", linewidth=2, linestyle="-", markersize=9, marker="*")
+    plt.fill_between(allqs, np.asarray(allfiles_plotting["train_phi_intra_attn_00_retro"])-np.asarray(allfiles_plotting["train_phi_intra_attn_00_std_retro"]), np.asarray(allfiles_plotting["train_phi_intra_attn_00_retro"])+np.asarray(allfiles_plotting["train_phi_intra_attn_00_std_retro"]), alpha=0.4)
+
+    plt.plot(allqs, allfiles_plotting["train_phi_intra_attn_11_retro"], label="$i \in C_1, j \in C_1$", linewidth=2, linestyle="-", markersize=9, marker="X")
+    plt.fill_between(allqs, np.asarray(allfiles_plotting["train_phi_intra_attn_11_retro"])-np.asarray(allfiles_plotting["train_phi_intra_attn_11_std_retro"]), np.asarray(allfiles_plotting["train_phi_intra_attn_11_retro"])+np.asarray(allfiles_plotting["train_phi_intra_attn_11_std_retro"]), alpha=0.4)
+
+    plt.plot(allqs, allfiles_plotting["train_phi_inter_attn_10_retro"], label="$i \in C_1, j \in C_0$", linewidth=2, linestyle="-", markersize=9, marker="+")
+    plt.fill_between(allqs, np.asarray(allfiles_plotting["train_phi_inter_attn_10_retro"])-np.asarray(allfiles_plotting["train_phi_inter_attn_10_std_retro"]), np.asarray(allfiles_plotting["train_phi_inter_attn_10_retro"])+np.asarray(allfiles_plotting["train_phi_inter_attn_10_std_retro"]), alpha=0.4)
+
+    plt.plot(allqs, allfiles_plotting["train_phi_inter_attn_01_retro"], label="$i \in C_0, j \in C_1$", linewidth=2, linestyle="-", markersize=9, marker="o")
+    plt.fill_between(allqs, np.asarray(allfiles_plotting["train_phi_inter_attn_01_retro"])-np.asarray(allfiles_plotting["train_phi_inter_attn_01_std_retro"]), np.asarray(allfiles_plotting["train_phi_inter_attn_01_retro"])+np.asarray(allfiles_plotting["train_phi_inter_attn_01_std_retro"]), alpha=0.4)
+
+    plt.grid(linestyle="dashed")
+    plt.legend(fontsize=20)
+    plt.xscale('log')
+    plt.tick_params(axis='x', labelsize=18)
+    plt.tick_params(axis='y', labelsize=18)
+    plt.xlabel(XAXISLABEL, fontsize=20)
+    plt.ylabel('$\Phi$ Values', fontsize=20)
+    plt.title("Training $\Phi$ Values for RetroGAT")
+    # plt.show()
+
+    fig.savefig(parent_path + "/retro_phi_values_train_real_data_ansatz_"+name+".pdf", dpi=400, bbox_inches='tight')
 
 #     # ---------------------------------------BETA VALUES---------------------------------------
 

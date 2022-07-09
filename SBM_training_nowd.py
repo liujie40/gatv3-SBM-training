@@ -40,7 +40,7 @@ data = tg.utils.from_networkx(g)
 data = data.to(device)
 gadj = tg.utils.to_dense_adj(data.edge_index).squeeze(0)
 
-SAMEGRAPHTESTING = True
+SAMEGRAPHTESTING = False
 
 g_test = nx.stochastic_block_model(sizes, probs)
 if SAMEGRAPHTESTING:
@@ -59,11 +59,6 @@ data.edge_index_test = data_test.edge_index
 EDGE_ATTR_2 = extract_eigen(1, gadj.unsqueeze(0))
 EDGE_ATTR_2_test = extract_eigen(1, gadj_test.unsqueeze(0))
 
-# print (torch.where(EDGE_ATTR_2 > 0)[0])
-# print (torch.where(EDGE_ATTR_2 < 0)[0])
-# print (torch.where(EDGE_ATTR_2_test > 0)[0])
-# print (torch.where(EDGE_ATTR_2_test < 0)[0])
-
 which_class = 1
 ground_truth = torch.from_numpy(np.concatenate((np.zeros(int(n/2)), np.ones(int(n/2)))))
 ground_truth_test = torch.from_numpy(np.concatenate((np.zeros(int(n/2)), np.ones(int(n/2)))))
@@ -78,10 +73,10 @@ std_ = 0.1
 mu_up = 20*std_*np.sqrt(np.log(n**2))/(2*np.sqrt(d))
 mu_lb = 0.01*std_/(2*np.sqrt(d))
 
-Nmus = 10
+Nmus = 17
 mus = torch.tensor(np.geomspace(mu_lb.item(), mu_up.item(), Nmus, endpoint=True)).to(device)
 
-epochs = 6000
+epochs = 1000
 trials = 5
 
 print ("---------CONFIG---------")
@@ -92,9 +87,9 @@ print (f"number of mus: {Nmus}")
 print (f"trials: {trials}")
 print (f"epochs: {epochs}")
 
-FIGURESAVEPATH = f"figures/SBM_varying_means_training_smallk_special_2dim_nowd"
-FILEPICKLESAVEPATH = f"pickle/SBM_varying_means_training_eigen1_smallk_special_2dim_nowd"
-METAPICKLESAVEPATH = f"pickle/SBM_varying_means_training_meta_smallk_special_2dim_nowd"
+FIGURESAVEPATH = f"figures/SBM_varying_means_training_smallk_special_2dim_nowd_diffgraph"
+FILEPICKLESAVEPATH = f"pickle/SBM_varying_means_training_eigen1_smallk_special_2dim_nowd_diffgraph"
+METAPICKLESAVEPATH = f"pickle/SBM_varying_means_training_meta_smallk_special_2dim_nowd_diffgraph"
 
 print (f"Figures can be found: {FIGURESAVEPATH}")
 print (f"Model pickle files can be found: {FILEPICKLESAVEPATH}")

@@ -113,7 +113,10 @@ def run_gcn(data, d, out_d, device, weight_decay, loss_tol, epochs):
     criterion = torch.nn.BCEWithLogitsLoss()
 
     # Define the solver, check documentation in pytorch for how to set the learning rate.
-    opt = torch.optim.Adam(model.parameters(), lr=1.0e-3, weight_decay=weight_decay)
+    if weight_decay == None:
+        opt = torch.optim.Adam(model.parameters(), lr=1.0e-3)
+    else:
+        opt = torch.optim.Adam(model.parameters(), lr=1.0e-3, weight_decay=weight_decay)
 
     # Test using the randomly initialized parameters.
     train_acc, test_acc = measure_accuracy(model, data)
@@ -173,7 +176,10 @@ def run_GATv3(data, d, out_d, k, device, weight_decay, loss_tol, epochs):
     criterion = torch.nn.BCEWithLogitsLoss()
 
     # Define the solver, check documentation in pytorch for how to set the learning rate.
-    opt = torch.optim.Adam(model.parameters(), lr=1.0e-3, weight_decay=weight_decay)
+    if weight_decay == None:
+        opt = torch.optim.Adam(model.parameters(), lr=1.0e-3)
+    else:
+        opt = torch.optim.Adam(model.parameters(), lr=1.0e-3, weight_decay=weight_decay)
 #     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(opt, 'min')
 
     # Test using the randomly initialized parameters.
@@ -196,7 +202,11 @@ def run_mlp_gat(data, d, out_d, device, weight_decay, loss_tol, epochs):
     criterion = torch.nn.BCEWithLogitsLoss()
 
     # Define the solver, check documentation in pytorch for how to set the learning rate.
-    opt = torch.optim.Adam(model.parameters(), lr=1.0e-3, weight_decay=weight_decay)
+    if weight_decay == None:
+        opt = torch.optim.Adam(model.parameters(), lr=1.0e-3)
+    else:
+        opt = torch.optim.Adam(model.parameters(), lr=1.0e-3, weight_decay=weight_decay)
+
 #     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(opt, 'min')
 
     # Test using the randomly initialized parameters.

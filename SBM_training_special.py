@@ -50,7 +50,7 @@ else:
 data_test = data_test.to(device)
 gadj_test = tg.utils.to_dense_adj(data_test.edge_index).squeeze(0)
 
-if SAMEGRAPHTESTING:
+if not SAMEGRAPHTESTING:
     assert torch.equal(gadj, gadj_test) == False, "Training and testing graphs are the same"
 
 data.adj_matrix = gadj

@@ -40,7 +40,7 @@ data = tg.utils.from_networkx(g)
 data = data.to(device)
 gadj = tg.utils.to_dense_adj(data.edge_index).squeeze(0)
 
-SAMEGRAPHTESTING = False
+SAMEGRAPHTESTING = True
 
 g_test = nx.stochastic_block_model(sizes, probs)
 if SAMEGRAPHTESTING:
@@ -78,11 +78,11 @@ std_ = 0.1
 mu_up = 20*std_*np.sqrt(np.log(n**2))/(2*np.sqrt(d))
 mu_lb = 0.01*std_/(2*np.sqrt(d))
 
-Nmus = 2
+Nmus = 10
 mus = torch.tensor(np.geomspace(mu_lb.item(), mu_up.item(), Nmus, endpoint=True)).to(device)
 
-epochs = 10
-trials = 1
+epochs = 6000
+trials = 5
 
 print ("---------CONFIG---------")
 print (f"number of nodes: {n}")
